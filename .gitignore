@@ -1,0 +1,14 @@
+
+/target/
+
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+*.log
+
+.DS_Store
+Thumbs.db
