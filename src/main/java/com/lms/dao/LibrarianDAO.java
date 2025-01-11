@@ -31,7 +31,7 @@ public class LibrarianDAO {
     }
     
     //add librarian
-    public void insertLibrarian(Librarian bean) {
+    public void insertLibrarian(Librarian bean) throws SQLException {
         try (Connection connection = getConnection();
             PreparedStatement ps = connection.prepareStatement(insertLibrarian)) {
             ps.setString(1, bean.getName());
@@ -42,7 +42,7 @@ public class LibrarianDAO {
             e.printStackTrace();
         }        
     }
-    //view a ibrarian
+    //view a librarian
     public Librarian getLibrarianById(int id) throws SQLException {
         Librarian librarian = null;
         try (Connection connection = getConnection();
@@ -80,7 +80,7 @@ public class LibrarianDAO {
         return librarians;
     }
     //update librarian
-    public void update(Librarian librarian) throws SQLException {
+    public void updateLibrarian(Librarian librarian) throws SQLException {
         try(Connection connection = getConnection();
                 PreparedStatement ps = connection.prepareStatement(updateLibrarian)) {
             ps.setString(1, librarian.getName());
@@ -93,7 +93,7 @@ public class LibrarianDAO {
         }
     }
     //delete librarian
-    public void delete(int id) throws SQLException {
+    public void deleteLibrarian(int id) throws SQLException {
         try(Connection connection = getConnection();
                 PreparedStatement ps = connection.prepareStatement(deleteLibrarian)) {
             ps.setInt(1, id);
