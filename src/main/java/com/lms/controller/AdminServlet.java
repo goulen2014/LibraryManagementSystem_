@@ -47,6 +47,7 @@ public class AdminServlet extends HttpServlet {
         } catch(Exception e) {
                     throw new ServletException(e);
         }
+        System.out.println("Admin servlet invoked");
     }        
     
     @Override
@@ -73,18 +74,18 @@ public class AdminServlet extends HttpServlet {
     private void listLibrarians(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         List<Librarian> librarians = librarianDAO.getAllLibrarians();
         request.setAttribute("librarians", librarians);
-        request.getRequestDispatcher("jsp/admin/viewLibrarians.jsp").forward(request, response);
+        request.getRequestDispatcher("viewLibrarians.jsp").forward(request, response);
     }
     
     private void newLibrarianForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("jsp/admin/addLibrarian.jsp").forward(request, response);
+        request.getRequestDispatcher("addLibrarian.jsp").forward(request, response);
     }
     
     private void editLibrarianForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
         Librarian librarian = librarianDAO.getLibrarianById(id);
         request.setAttribute("librarian", librarian);
-        request.getRequestDispatcher("jsp/admin/editLibrarian.jsp").forward(request, response);
+        request.getRequestDispatcher("editLibrarian.jsp").forward(request, response);
     }
     
     private void insertLibrarian(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -120,6 +121,6 @@ public class AdminServlet extends HttpServlet {
         if(session != null) {
             session.invalidate();
         }
-        response.sendRedirect("jsp/login.jsp");
+        response.sendRedirect("login.jsp");
     }
 }

@@ -18,14 +18,25 @@ public class LibrarianDAO {
     private static final String viewLibrarian = "select id, name, email, phone from librarians where id=?";
     private static final String viewAllLibrarians = "select * from librarians";
     private static final String updateLibrarian = "update librarians set name=?, email=?, phone=? where id=?";
-    private static final String deleteLibrarian = "delect from librarians where id=?";
+    private static final String deleteLibrarian = "delete from librarians where id=?"; 
  
+    static {
+        try {
+            // Optional: Explicitly register the MySQL driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("MySQL Driver not found", e);
+        }
+    }
+    
     protected Connection getConnection() {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, user, password);
         } catch(Exception e) {
             e.printStackTrace();
+            throw new RuntimeException("Failed to establish a database connection", e);
         }
         return connection;
     }
@@ -86,6 +97,7 @@ public class LibrarianDAO {
             ps.setString(1, librarian.getName());
             ps.setString(2, librarian.getEmail());
             ps.setString(3, librarian.getPhone());
+            ps.setInt(4, librarian.getId());
             
             ps.executeUpdate();
         } catch(SQLException e) {
