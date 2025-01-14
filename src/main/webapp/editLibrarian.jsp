@@ -7,7 +7,7 @@
         <title>Edit Librarian</title>
     </head>
     <body>
-        <h1>Edit Librarian Details</h1>
+        <h1>Update Librarian Details</h1>
         <form action="AdminServlet?action=update" method="post">
             <label><b>Librarian ID:</b></label>
             <input type="int" name="id" value="${librarian.id}"></br></br>
