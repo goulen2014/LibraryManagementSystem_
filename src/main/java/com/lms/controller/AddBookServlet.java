@@ -9,8 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet("/AddBook")
 public class AddBookServlet extends HttpServlet {
@@ -35,10 +33,10 @@ public class AddBookServlet extends HttpServlet {
         Book book = new Book(title, author, quantity);
         try {
             bookDAO.insertBook(book);
-        } catch (SQLException ex) {
-            Logger.getLogger(AddBookServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         
-        response.sendRedirect("ViewBooks");
+        response.sendRedirect("viewBooks");
     }
 }
