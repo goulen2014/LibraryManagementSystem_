@@ -4,49 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View Librarians</title>
-    <style>
-        table {
-            width: 80%;
-            border-collapse: collapse;
-            margin: 20px auto;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f4f4f4;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        a {
-            display: inline-block;
-            margin: 10px auto;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-            background-color: #007BFF;
-            padding: 8px 12px;
-            border-radius: 5px;
-        }
-
-        a:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>View Librarians</title>    
 </head>
 <body>
     <h1>List of Librarians</h1>
 
-    <a href="AddLibrarian">Add New Librarian</a>
+    <a href="addLibrarian.jsp">Add New Librarian</a>
 
     <table>
         <thead>
@@ -71,8 +34,8 @@
                 <td><%= librarian.getEmail() %></td>
                 <td><%= librarian.getPhone() %></td>
                 <td>
-                    <a href="EditLibrarian?id=<%= librarian.getId() %>">Edit</a>
-                    <a href="DeleteLibrarian?id=<%= librarian.getId() %>" onclick="return confirm('Are you sure you want to delete this librarian?')">Delete</a>
+                    <a href="editLibrarian.jsp?id=<%= librarian.getId() %>">Edit</a>
+                    <a href="AdminServlet?id=<%= librarian.getId() %>&action=delete" onclick="return confirm('Are you sure you want to delete this librarian?')">Delete</a>
                 </td>
             </tr>
             <%

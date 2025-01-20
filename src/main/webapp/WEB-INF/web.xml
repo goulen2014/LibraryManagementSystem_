@@ -11,12 +11,4 @@
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
-    <servlet>
-        <servlet-name>ViewBooksServlet</servlet-name>
-        <servlet-class>com.lms.controller.ViewBooksServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ViewBookServlet</servlet-name>
-        <url-pattern>/ViewBooks</url-pattern>
-    </servlet-mapping>
 </web-app>
