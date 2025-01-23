@@ -9,7 +9,7 @@
     <body>
         <div style="text-align:center;">
             <h1>Library Management System</h1>
-            <form action="LoginServlet" method="post">
+            <form action="AdminLoginServlet" method="post">
                 <label><b>Username:</b></label>
                 <input type="text" name="username" required></br></br>
                 <label><b>Password:</b></label>
