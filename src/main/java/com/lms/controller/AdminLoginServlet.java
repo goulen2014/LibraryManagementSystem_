@@ -17,6 +17,7 @@ public class AdminLoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
+        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
         if(username.equals("UserName") && password.equals("PassWord")) {
@@ -25,9 +26,10 @@ public class AdminLoginServlet extends HttpServlet {
             response.sendRedirect("adminDashboard.jsp");
         } else {
             out.println("Invalid username or password!");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.include(request, response);
+            response.sendRedirect("login.jsp");
+            
         }
+        out.close();
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

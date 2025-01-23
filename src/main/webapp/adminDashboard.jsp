@@ -12,7 +12,7 @@
             <a href="addLibrarian.jsp"><b>Add Librarian</b></a></br></br>
             <a href="viewLibrarians.jsp"><b>View Librarians</b></a></br></br>
             <a href="editLibrarian.jsp"><b>Update Librarian</b></a></br></br>
-            <a href="logoutServlet"><b>Logout</b></a>
+            <a href="AdminServlet?action=logout"><b>Logout</b></a>
         </div>
     </body>
 </html>
