@@ -19,7 +19,14 @@ public class LibrarianDAO {
     private static final String viewAllLibrarians = "select * from librarians";
     private static final String updateLibrarian = "update librarians set name=?, email=?, phone=? where id=?";
     private static final String deleteLibrarian = "delete from librarians where id=?"; 
-
+    //register mysql driver
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch(ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     
     protected Connection getConnection() {
         Connection connection = null;

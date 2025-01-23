@@ -18,7 +18,8 @@
             <label><b>New Phone:</b></label>
             <input type="text" name="phone" value="${librarian.phone}" required></br></br></br>
             <button type="submit"><b>Update Librarian</b></button></br></br>
-            <a href="AdminServlet"><b>Cancel</b></a>            
+            <a href="editLibrarian.jsp"><b>Cancel</b></a>            
+            <a href="adminDashboard.jsp"><b>Back</b></a>            
         </form>
     </body>
 </html>

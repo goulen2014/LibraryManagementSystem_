@@ -14,9 +14,10 @@
             <label><b>Email:</b></label>
             <input type="email" name="email" required></br></br>
             <label><b>Phone:</b></label>
-            <input type="text" name="phone" required></br></br></br>
-            <input type="submit" value="Add"></br></br>
-            <a href="dashboard.jsp"><b>Cancel</b></a>         
+            <input type="text" name="phone" required></br></br>
+            <input type="submit" value="Add"></br></br></br>
+            <a href="addLibrarian.jsp"><b>Cancel</b></a>         
+            <a href="adminDashboard.jsp"><b>Back</b></a>         
         </form>
     </body>
 </html>

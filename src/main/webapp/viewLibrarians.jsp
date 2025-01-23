@@ -9,7 +9,7 @@
 <body>
     <h1>List of Librarians</h1>
     
-    <form action="AdminServlet" method="post">
+    <form action="AdminServlet" method="get">
         <a href="addLibrarian.jsp">Add New Librarian</a>
 
         <table>
@@ -50,7 +50,8 @@
                     }
                 %>
             </tbody>
-        </table>
+        </table>                 
+        <a href="adminDashboard.jsp"><b>Back</b></a>    
     </form>
 </body>
 </html>

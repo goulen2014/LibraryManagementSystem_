@@ -11,6 +11,6 @@
         <a href="AddBook.jsp">Add Book</a><br>
         <a href="ViewBooks.jsp">View Books</a><br>
         <a href="IssueBook.jsp">Issue Book</a><br>
-        <a href="LogoutServlet">Logout</a>
+        <a href="">Logout</a>
     </body>
 </html>
