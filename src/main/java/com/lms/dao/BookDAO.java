@@ -12,9 +12,13 @@ import java.util.List;
 public class BookDAO {
     private String url = "jdbc:mysql://localhost:3306/librarymanagementsystem";
     private String username = "root";
-    private String password = "admin_1";
+    private String password = "";
     
     private static final String insertQuery = "insert into books(title, author, quantity) values(?,?,?)";
+    private static final String selectAllBooks = "select * from books";
+    private static final String selectBookById = "select * from books where id=?";
+    private static final String updateBook = "update books set title=?, author=?, quantity=? where id=?";
+    private static final String deleteBook = "delete from books where id=?";
     
     //add new book
     public void insertBook(Book book) throws SQLException {
@@ -28,9 +32,7 @@ public class BookDAO {
         } catch(SQLException e) {
             e.printStackTrace();
         }
-    }
-    
-    private static final String selectAllBooks = "select * from books";
+    }    
     
     //retrieve all books
     public List<Book> getAllBooks() {
@@ -56,8 +58,6 @@ public class BookDAO {
         return books;
     }
     
-    private static final String selectBookById = "select * from books where id=?";
-    private static final String updateBook = "update books set title=?, author=?, quantity=? where id=?";
     
     //retrieve book by Id
     public Book getBookById(int id) throws SQLException {
@@ -90,6 +90,18 @@ public class BookDAO {
             
             ps.executeUpdate();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //delete book
+    public void deleteBook(Book book) throws SQLException {
+        try(Connection con = DriverManager.getConnection(url, username, password);
+                PreparedStatement ps = con.prepareStatement(deleteBook)) {
+            ps.setInt(1, book.getId());
+            
+            ps.executeUpdate();
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }

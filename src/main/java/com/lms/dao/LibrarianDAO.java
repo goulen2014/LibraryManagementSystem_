@@ -12,23 +12,14 @@ import java.util.List;
 public class LibrarianDAO {
     private final String url = "jdbc:mysql://localhost:3306/librarymanagementsystem";
     private final String user = "root";
-    private final String password = "admin_1";
+    private final String password = "";
     
     private static final String insertLibrarian = "insert into librarians(name, email, phone) values(?,?,?)";
     private static final String viewLibrarian = "select id, name, email, phone from librarians where id=?";
     private static final String viewAllLibrarians = "select * from librarians";
     private static final String updateLibrarian = "update librarians set name=?, email=?, phone=? where id=?";
     private static final String deleteLibrarian = "delete from librarians where id=?"; 
- 
-    static {
-        try {
-            // Optional: Explicitly register the MySQL driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException("MySQL Driver not found", e);
-        }
-    }
+
     
     protected Connection getConnection() {
         Connection connection = null;
