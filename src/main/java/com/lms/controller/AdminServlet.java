@@ -117,9 +117,10 @@ public class AdminServlet extends HttpServlet {
     }
     
     private void logoutAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-        HttpSession session = request.getSession(false);
-        if(session != null) {
-            session.invalidate();
+        HttpSession session = request.getSession();        
+        if(session != null) {  
+            session.removeAttribute("username");
+            session.invalidate();            
         }
         response.sendRedirect("login.jsp");
     }

@@ -10,7 +10,7 @@
         <h1>Update Librarian Details</h1>
         <form action="AdminServlet?action=update" method="post">
             <label><b>Librarian ID:</b></label>
-            <input type="int" name="id" value="${librarian.id}"></br></br>
+            <input type="text" name="id" value="${librarian.id}"></br></br>
             <label><b>New Name:</b></label>
             <input type="text" name="name" value="${librarian.name}" required></br></br>
             <label><b>New Email:</b></label>

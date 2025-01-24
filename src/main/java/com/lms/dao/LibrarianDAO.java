@@ -12,7 +12,7 @@ import java.util.List;
 public class LibrarianDAO {
     private final String url = "jdbc:mysql://localhost:3306/librarymanagementsystem";
     private final String user = "root";
-    private final String password = "";
+    private final String password = "admin_1";
     
     private static final String insertLibrarian = "insert into librarians(name, email, phone) values(?,?,?)";
     private static final String viewLibrarian = "select id, name, email, phone from librarians where id=?";
