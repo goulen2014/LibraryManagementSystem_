@@ -64,7 +64,7 @@ public class AdminServlet extends HttpServlet {
                     break;
                 default:
                     listLibrarians(request, response);
-                    break;                
+                    break;               
             }
         } catch(Exception e) {
             throw new ServletException(e);
