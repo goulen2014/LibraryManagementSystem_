@@ -7,10 +7,12 @@
         <title>Librarian Dashboard</title>
     </head>
     <body>
-        <h1>Welcome, Librarian!</h1>
-        <a href="AddBook.jsp">Add Book</a><br>
-        <a href="ViewBooks.jsp">View Books</a><br>
-        <a href="IssueBook.jsp">Issue Book</a><br>
-        <a href="">Logout</a>
+        <div style="text-align: center;">
+            <h1>Welcome, Librarian!</h1>
+            <ul>
+                <li><a href="viewBooks.jsp"><b>Manage Books</b></li>
+                <li><a href="LibrarianServlet?action=logout">Logout</a></li>
+            </ul>
+        </div>
     </body>
 </html>
