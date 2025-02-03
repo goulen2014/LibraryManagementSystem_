@@ -1,87 +1,105 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.lms.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import com.lms.dao.BookDAO;
+import com.lms.model.Book;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
-/**
- *
- * @author Glen
- */
 @WebServlet(name = "LibrarianServlet", urlPatterns = {"/LibrarianServlet"})
 public class LibrarianServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LibrarianServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LibrarianServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    private BookDAO bookDAO;
+    
+    @Override
+    public void init() {
+        bookDAO = new BookDAO();
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if(action==null) action="listBooks";
+        
+        try {
+            switch(action) {
+                case "new":
+                    newBook(request, response);
+                    break;
+                case "edit":
+                    editBook(request, response);
+                    break;
+//                case "delete":
+//                    deleteBook(request, response);
+//                    break;
+//                case "issue":
+//                    issueBook(request, response);
+//                    break;
+                default:
+                    listBooks(request, response);
+                    break;
+            }
+        } catch(SQLException e) {
+            throw new ServletException(e);
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action= request.getParameter("action");
+        
+        try{
+            switch(action) {
+                case "insert":
+                    insertBook(request, response);
+                    break;
+//                case "update":
+//                    updateBook(request, response);
+//                    break;
+//                case "issue":
+//                    issueBook(request, response);
+//                    break;
+                default:
+                    listBooks(request, response);
+                    break;
+            }
+        } catch(SQLException e) {
+            throw new ServletException(e);
+        }
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    
+    //display books
+    private void listBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        List<Book> books = bookDAO.getAllBooks();
+        request.setAttribute("books", books);
+        request.getRequestDispatcher("viewBooks.jsp").forward(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+    
+    //new book form
+    private void newBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("addBook.jsp").forward(request, response);
+    }
+    
+    //edit a book form
+    private void editBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Book book = bookDAO.getBookById(id);
+        request.setAttribute("book", book);
+        request.getRequestDispatcher("editBook.jsp").forward(request, response);
+    }
+    
+    //insert new book
+    private void insertBook(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String title = request.getParameter("title");
+        String author = request.getParameter("author");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        
+        Book book = new Book(title, author, quantity);
+        bookDAO.insertBook(book);
+        response.sendRedirect("LibrarianServlet");
+    }
 }
