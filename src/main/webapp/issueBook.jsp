@@ -15,6 +15,9 @@
             <label>Borrower Name:</label>
             <input type="text" name="borrower" required /></br></br>
             
+            <label>Librarian ID:</label>
+            <input type="text" name="librarianId" required /></br></br>
+            
             <input type="submit" value="Issue Book">
         </form>
             <a href="viewBooks.jsp">Back to Book List</a>

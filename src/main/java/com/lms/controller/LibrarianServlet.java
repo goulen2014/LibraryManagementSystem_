@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -33,12 +34,12 @@ public class LibrarianServlet extends HttpServlet {
                 case "edit":
                     editBook(request, response);
                     break;
-//                case "delete":
-//                    deleteBook(request, response);
-//                    break;
-//                case "issue":
-//                    issueBook(request, response);
-//                    break;
+                case "delete":
+                    deleteBook(request, response);
+                    break;
+                case "issue":
+                    issueBookForm(request, response);
+                    break;
                 default:
                     listBooks(request, response);
                     break;
@@ -57,12 +58,12 @@ public class LibrarianServlet extends HttpServlet {
                 case "insert":
                     insertBook(request, response);
                     break;
-//                case "update":
-//                    updateBook(request, response);
-//                    break;
-//                case "issue":
-//                    issueBook(request, response);
-//                    break;
+                case "update":
+                    updateBook(request, response);
+                    break;
+                case "issue":
+                    issueBook(request, response);
+                    break;
                 default:
                     listBooks(request, response);
                     break;
@@ -101,5 +102,56 @@ public class LibrarianServlet extends HttpServlet {
         Book book = new Book(title, author, quantity);
         bookDAO.insertBook(book);
         response.sendRedirect("LibrarianServlet");
+    }
+    
+    //update book details
+    private void updateBook(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String title = request.getParameter("title");
+        String author = request.getParameter("author");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        
+        Book book = new Book(id, title, author, quantity);
+        bookDAO.updateBook(book);
+        response.sendRedirect("LibrarianServlet");        
+    }
+    
+    //delete a book from the database
+    private void deleteBook(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        bookDAO.deleteBook(id);
+        response.sendRedirect("LibrarianServlet");
+    }
+    
+    //issue book form
+    private void issueBookForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("issueBook.jsp").forward(request, response);
+    }
+    
+    //issue a book to a user
+    private void issueBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        int bookId = Integer.parseInt(request.getParameter("bookId"));
+        int librarianId = Integer.parseInt(request.getParameter("librarianId"));
+        
+        boolean success = bookDAO.issueBook(bookId, librarianId);
+        if(success) {
+            response.sendRedirect("LibrarianServlet");
+        } else {
+            response.getWriter().println("<h3>Error: Book cannot be returned.</h3>");
+        }
+    }
+    
+    //return an issued book
+    private void returnBook(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        int bookId = Integer.parseInt(request.getParameter("bookId"));
+    }
+    
+    //logout librarian
+    private void logoutLibrarian(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            session.invalidate();
+        }
+        response.sendRedirect("login.jsp");
     }
 }
