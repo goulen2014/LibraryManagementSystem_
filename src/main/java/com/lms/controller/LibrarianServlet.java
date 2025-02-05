@@ -93,7 +93,7 @@ public class LibrarianServlet extends HttpServlet {
     
     //edit a book form
     private void editBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id").trim());
         Book book = bookDAO.getBookById(id);
         request.setAttribute("book", book);
         request.getRequestDispatcher("editBook.jsp").forward(request, response);
@@ -112,7 +112,7 @@ public class LibrarianServlet extends HttpServlet {
     
     //update book details
     private void updateBook(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id").trim());
         String title = request.getParameter("title");
         String author = request.getParameter("author");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -136,7 +136,7 @@ public class LibrarianServlet extends HttpServlet {
     
     //issue a book to a user
     private void issueBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-        String bookIdParam = request.getParameter("bookId");
+        String bookIdParam = request.getParameter("bookId").trim();
         if(bookIdParam == null || bookIdParam.isEmpty()) {
             response.getWriter().println("<h3>Error: Book ID is required.</h3>");        
         }
@@ -154,7 +154,7 @@ public class LibrarianServlet extends HttpServlet {
     
     //return an issued book
     private void returnBook(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int bookId = Integer.parseInt(request.getParameter("id"));
+        int bookId = Integer.parseInt(request.getParameter("id").trim());
         boolean success = bookDAO.returnBook(bookId);
         if(success) {
             response.sendRedirect("LibrarianServlet");

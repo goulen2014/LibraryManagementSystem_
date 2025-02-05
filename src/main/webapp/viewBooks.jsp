@@ -23,10 +23,10 @@
                     for(Book book : books) {
             %>
             <tr>
-                <td><%= book.getId() %></td>
-                <td><%= book.getTitle() %></td>
-                <td><%= book.getAuthor() %></td>
-                <td><%= book.getQuantity() %></td>
+                <td><%=book.getId() %></td>
+                <td><%=book.getTitle() %></td>
+                <td><%=book.getAuthor() %></td>
+                <td><%=book.getQuantity() %></td>
                 <td>
                     <a href="LibrarianServlet?action=edit&id=<%=book.getId() %>">Edit</a> |
                     <a href="LibrarianServlet?action=delete&id= <%=book.getId() %>" onclick="return confirm('Are you sure?')">Delete</a> |
