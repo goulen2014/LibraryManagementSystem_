@@ -19,8 +19,8 @@ public class BookDAO {
     private static final String selectBookById = "select * from books where id=?";
     private static final String updateBook = "update books set title=?, author=?, quantity=? where id=?";
     private static final String deleteBook = "delete from books where id=?";
-    private static final String issueBook = "insert into issued_books (book_id, librarian_id, issue_date, return_date) values (?,?, now(), null;";
-    private static final String returnBook = "update issued_books set return=now() where book_id=? and return_date is null;";
+    private static final String issueBook = "insert into issued_books (book_id, librarian_id, issue_date, return_date) values (?,?, now(), null);";
+    private static final String returnBook = "update issued_books set return_date=now() where book_id=? and return_date is null;";
     
     //add new book
     public void insertBook(Book book) throws SQLException {
@@ -90,6 +90,7 @@ public class BookDAO {
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getAuthor());
             ps.setInt(3, book.getQuantity());
+            ps.setInt(4, book.getId());
             
             rowUpdated = ps.executeUpdate() > 0;
         } 

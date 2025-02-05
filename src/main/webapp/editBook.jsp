@@ -13,7 +13,7 @@
             Book book = (Book) request.getAttribute("book");
         %>
         
-        <form action="LibrarianServlet?action=" method="post">
+        <form action="LibrarianServlet?action=update" method="post">
             <input type="hidden" name="id" value="<%= book.getId() %>">
             
             <label>Title:</label>
@@ -27,6 +27,6 @@
             
             <input type="submit" value="Update Book">
         </form>
-            <a href="viewBook.jsp">Back to Book List</a>
+            <a href="LibrarianServlet">Back to Book List</a>
     </body>
 </html>

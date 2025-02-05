@@ -40,6 +40,9 @@ public class LibrarianServlet extends HttpServlet {
                 case "issue":
                     issueBookForm(request, response);
                     break;
+                case "return":
+                    returnBook(request, response);
+                    break;
                 default:
                     listBooks(request, response);
                     break;
@@ -63,6 +66,9 @@ public class LibrarianServlet extends HttpServlet {
                     break;
                 case "issue":
                     issueBook(request, response);
+                    break;
+                case "logout":
+                    logoutLibrarian(request, response);
                     break;
                 default:
                     listBooks(request, response);
@@ -118,7 +124,7 @@ public class LibrarianServlet extends HttpServlet {
     
     //delete a book from the database
     private void deleteBook(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id").trim());
         bookDAO.deleteBook(id);
         response.sendRedirect("LibrarianServlet");
     }
@@ -130,20 +136,31 @@ public class LibrarianServlet extends HttpServlet {
     
     //issue a book to a user
     private void issueBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-        int bookId = Integer.parseInt(request.getParameter("bookId"));
+        String bookIdParam = request.getParameter("bookId");
+        if(bookIdParam == null || bookIdParam.isEmpty()) {
+            response.getWriter().println("<h3>Error: Book ID is required.</h3>");        
+        }
+        
+        int bookId = Integer.parseInt(bookIdParam);
         int librarianId = Integer.parseInt(request.getParameter("librarianId"));
         
         boolean success = bookDAO.issueBook(bookId, librarianId);
         if(success) {
             response.sendRedirect("LibrarianServlet");
         } else {
-            response.getWriter().println("<h3>Error: Book cannot be returned.</h3>");
+            response.getWriter().println("<h3>Error: Book cannot be issued.</h3>");
         }
     }
     
     //return an issued book
     private void returnBook(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int bookId = Integer.parseInt(request.getParameter("bookId"));
+        int bookId = Integer.parseInt(request.getParameter("id"));
+        boolean success = bookDAO.returnBook(bookId);
+        if(success) {
+            response.sendRedirect("LibrarianServlet");
+        } else {
+            response.getWriter().println("<h3>Error: Book cannot be returned.</h3>");
+        }
     }
     
     //logout librarian
@@ -152,6 +169,6 @@ public class LibrarianServlet extends HttpServlet {
         if(session != null) {
             session.invalidate();
         }
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("librarianLoginPage.jsp");
     }
 }
