@@ -43,6 +43,9 @@ public class LibrarianServlet extends HttpServlet {
                 case "return":
                     returnBook(request, response);
                     break;
+                case "logout":
+                    logoutLibrarian(request, response);
+                    break;
                 default:
                     listBooks(request, response);
                     break;
@@ -66,10 +69,7 @@ public class LibrarianServlet extends HttpServlet {
                     break;
                 case "issue":
                     issueBook(request, response);
-                    break;
-                case "logout":
-                    logoutLibrarian(request, response);
-                    break;
+                    break;                
                 default:
                     listBooks(request, response);
                     break;
@@ -164,9 +164,10 @@ public class LibrarianServlet extends HttpServlet {
     }
     
     //logout librarian
-    private void logoutLibrarian(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession(false);
+    private void logoutLibrarian(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         if(session != null) {
+            session.removeAttribute("email");
             session.invalidate();
         }
         response.sendRedirect("librarianLoginPage.jsp");

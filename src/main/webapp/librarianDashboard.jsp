@@ -7,6 +7,16 @@
         <title>Librarian Dashboard</title>
     </head>
     <body>
+        <%
+            //prevent back button after logout
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");//HTTP 1.1
+            response.setHeader("Pragma", "no-cache");//HTTP 1.0
+            response.setHeader("Expires", "0");//Proxies
+            //redirect if email is null
+            if(session.getAttribute("email")==null) {
+                response.sendRedirect("librarianLoginPage.jsp");
+            }
+        %>
         <div style="text-align: center;">
             <h1>Welcome, Librarian!</h1>
             <ul>
