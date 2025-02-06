@@ -21,6 +21,6 @@
             
             <input type="submit" value="Add Book">
         </form>
-        <a href="viewBooks.jsp">Back to Book List</a>
+        <a href="LibrarianServlet">Back to Book List</a>
     </body>
 </html>
