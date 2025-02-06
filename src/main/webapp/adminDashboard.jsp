@@ -14,7 +14,7 @@
             response.setHeader("Expires", "0");//Proxies
             //redirect if username is null
             if(session.getAttribute("username")==null) {
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("adminLoginPage.jsp");
             }
         %>
         
@@ -22,7 +22,7 @@
             <h1>Welcome, ${username}!</h1>
             <a href="AdminServlet?action=new"><b>Add Librarian</b></a></br></br>
             <a href="AdminServlet"><b>View Librarians</b></a></br></br>            
-            <a href="AdminServlet?action=logout"><b>Logout</b></a>
+            <a href="AdminServlet?action=logout">Logout</a>
         </div>
     </body>
 </html>

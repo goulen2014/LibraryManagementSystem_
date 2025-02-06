@@ -4,12 +4,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
+        <title>Admin Login Page</title>
     </head>
     <body>
         
         <div style="text-align:center;">
-            <h1>Library Management System</h1>
+            <h1><u>Library Management System</u></h1>
+            <h2>Admin Login</h2>
             <form action="AdminLoginServlet" method="post">
                 <label><b>Username:</b></label>
                 <input type="text" name="username" required></br></br>
