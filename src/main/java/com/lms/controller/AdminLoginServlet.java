@@ -2,7 +2,6 @@
 package com.lms.controller;
 
 import com.lms.dao.LoginDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,7 +29,7 @@ public class AdminLoginServlet extends HttpServlet {
             response.sendRedirect("adminDashboard.jsp");
         } else {
             out.println("Invalid username or password!");
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("adminLoginPage.jsp");
             
         }
         out.close();

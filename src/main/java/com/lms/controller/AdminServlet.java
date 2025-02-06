@@ -122,6 +122,6 @@ public class AdminServlet extends HttpServlet {
             session.removeAttribute("username");
             session.invalidate();            
         }
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("adminLoginPage.jsp");
     }
 }
