@@ -15,7 +15,8 @@
                 <input type="email" name="email" required></br></br>
                 <label><b>Password:</b></label>
                 <input type="password" name="password" required></br></br></br>
-                <button type="submit"><b>Login</b></button>
+                <button type="submit"><b>Login</b></button></br></br></br>
+                <a href="index.html">Back</a>
             </form>
         </div>
     </body>
