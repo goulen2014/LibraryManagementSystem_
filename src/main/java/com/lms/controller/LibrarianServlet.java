@@ -2,6 +2,7 @@ package com.lms.controller;
 
 import com.lms.dao.BookDAO;
 import com.lms.model.Book;
+import com.lms.model.IssuedBooks;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -39,6 +40,9 @@ public class LibrarianServlet extends HttpServlet {
                     break;
                 case "issue":
                     issueBookForm(request, response);
+                    break;
+                case "viewIssuedBooks":
+                    viewIssuedBooks(request, response);
                     break;
                 case "return":
                     returnBook(request, response);
@@ -150,6 +154,13 @@ public class LibrarianServlet extends HttpServlet {
         } else {
             response.getWriter().println("<h3>Error: Book cannot be issued.</h3>");
         }
+    }
+    
+    //view issued books
+    private void viewIssuedBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        List<IssuedBooks> issuedBooks = bookDAO.viewIssuedBooks();
+        request.setAttribute("issuedBooks", issuedBooks);
+        request.getRequestDispatcher("viewIssuedBooks.jsp").forward(request, response);
     }
     
     //return an issued book

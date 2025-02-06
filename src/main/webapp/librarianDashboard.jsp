@@ -21,6 +21,7 @@
             <h1>Welcome, Librarian!</h1>
             <ul>
                 <li><a href="LibrarianServlet"><b>Manage Books</b></li></br>
+                <li><a href="LibrarianServlet?action=viewIssuedBooks"><b>View Issued Books</b></a></li></br>
                 <li><a href="LibrarianServlet?action=logout">Logout</a></li>
             </ul>
         </div>

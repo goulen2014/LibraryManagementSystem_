@@ -1,7 +1,9 @@
 package com.lms.dao;
 
 import com.lms.model.Book;
+import com.lms.model.IssuedBooks;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +23,7 @@ public class BookDAO {
     private static final String deleteBook = "delete from books where id=?";
     private static final String issueBook = "insert into issued_books (book_id, librarian_id, issue_date, return_date) values (?,?, now(), null);";
     private static final String returnBook = "update issued_books set return_date=now() where book_id=? and return_date is null;";
+    private static final String viewIssuedBooks = "select book_id, librarian_id, issue_date, return_date from issued_books;";
     
     //add new book
     public void insertBook(Book book) throws SQLException {
@@ -119,6 +122,26 @@ public class BookDAO {
             bookIssued = ps.executeUpdate() > 0;            
         }
         return bookIssued;
+    }
+    
+    //view issued books
+    public List<IssuedBooks> viewIssuedBooks() throws SQLException {
+        List<IssuedBooks> issuedBooks = new ArrayList<>();
+        try(Connection con = DriverManager.getConnection(url, username, password);
+                PreparedStatement ps = con.prepareStatement(viewIssuedBooks)) {
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                int bookId = rs.getInt("book_id");
+                int librarianId = rs.getInt("librarian_id");
+                Date issueDate = rs.getDate("issue_date");
+                Date returnDate = rs.getDate("return_date");
+                issuedBooks.add(new IssuedBooks(bookId, librarianId, issueDate, returnDate));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return issuedBooks;
     }
     
     //return a book
