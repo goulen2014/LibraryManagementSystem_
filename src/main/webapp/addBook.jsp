@@ -7,20 +7,25 @@
         <title>Add Book</title>
     </head>
     <body>
-        <h1>Add New Book</h1>
+        <div style="text-align: center";>
+            <h1>Add New Book</h1>
         
-        <form action="LibrarianServlet?action=insert" method="post">
-            <label>Title</label>
-            <input type="text" name="title" required />
+            <form action="LibrarianServlet?action=insert" method="post">
+                <label>Title:</label>
+                <input type="text" name="title" required /></br></br>
+
+                <label>Author:</label>
+                <input type="text" name="author" required /></br></br>
+
+                <label>Quantity:</label>
+                <input type="number" name="quantity" min="1" required /></br></br>
+
+                <input type="submit" value="Add Book"></br></br>
+            </form>
+            <a href="LibrarianServlet">Back to Book List</a> |
+            <a href="librarianDashboard.jsp">Back to Dashboard</a>
             
-            <label>Author:</label>
-            <input type="text" name="author" required />
-            
-            <label>Quantity</label>
-            <input type="number" name="quantity" min="1" required />
-            
-            <input type="submit" value="Add Book">
-        </form>
-        <a href="LibrarianServlet">Back to Book List</a>
+        </div>
+        
     </body>
 </html>

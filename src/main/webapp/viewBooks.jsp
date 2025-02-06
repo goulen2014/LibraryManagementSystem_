@@ -7,9 +7,10 @@
         <title>View Books</title>
     </head>
     <body>
-        <h1>Book List</h1>
+        <div style="text-align: center";>
+            <h1>Book List</h1>
         
-        <table border="1">
+        <table border="1" style="margin: 0px auto;">
             <tr>
                 <th>ID</th>
                 <th>Title</th>
@@ -42,6 +43,6 @@
             <% } %>            
         </table></br>
         <a href="addBook.jsp">Add New Book</a> | <a href="librarianDashboard.jsp">Back to Dashboard</a>
-        
+        </div>                
     </body>
 </html>
