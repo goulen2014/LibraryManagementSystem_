@@ -147,8 +147,9 @@ public class LibrarianServlet extends HttpServlet {
         
         int bookId = Integer.parseInt(bookIdParam);
         int librarianId = Integer.parseInt(request.getParameter("librarianId"));
+        String issuedTo = request.getParameter("issuedTo");
         
-        boolean success = bookDAO.issueBook(bookId, librarianId);
+        boolean success = bookDAO.issueBook(bookId, librarianId, issuedTo);
         if(success) {
             response.sendRedirect("LibrarianServlet");
         } else {
