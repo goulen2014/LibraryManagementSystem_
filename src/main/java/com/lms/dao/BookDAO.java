@@ -21,9 +21,9 @@ public class BookDAO {
     private static final String selectBookById = "select * from books where id=?";
     private static final String updateBook = "update books set title=?, author=?, quantity=? where id=?";
     private static final String deleteBook = "delete from books where id=?";
-    private static final String issueBook = "insert into issued_books (book_id, librarian_id, issue_date, return_date) values (?,?, now(), null);";
+    private static final String issueBook = "insert into issued_books (book_id, librarian_id, issued_to, issue_date, return_date) values (?,?,?, now(), null);";
     private static final String returnBook = "update issued_books set return_date=now() where book_id=? and return_date is null;";
-    private static final String viewIssuedBooks = "select book_id, librarian_id, issue_date, return_date from issued_books;";
+    private static final String viewIssuedBooks = "select book_id, librarian_id, issued_to, issue_date, return_date from issued_books;";
     
     //add new book
     public void insertBook(Book book) throws SQLException {
@@ -113,12 +113,13 @@ public class BookDAO {
     }
     
     //issue a book
-    public boolean issueBook(int bookId, int librarianId) throws SQLException {
+    public boolean issueBook(int bookId, int librarianId, String issuedTo) throws SQLException {
         boolean bookIssued;
         try(Connection con = DriverManager.getConnection(url, username, password);
                 PreparedStatement ps = con.prepareStatement(issueBook)) {
             ps.setInt(1, bookId);
             ps.setInt(2, librarianId);
+            ps.setString(3, issuedTo);
             bookIssued = ps.executeUpdate() > 0;            
         }
         return bookIssued;
@@ -134,9 +135,10 @@ public class BookDAO {
             while(rs.next()) {
                 int bookId = rs.getInt("book_id");
                 int librarianId = rs.getInt("librarian_id");
+                String issuedTo = rs.getString("issued_to");
                 Date issueDate = rs.getDate("issue_date");
                 Date returnDate = rs.getDate("return_date");
-                issuedBooks.add(new IssuedBooks(bookId, librarianId, issueDate, returnDate));
+                issuedBooks.add(new IssuedBooks(bookId, librarianId, issuedTo, issueDate, returnDate));
             }
         } catch(SQLException e) {
             e.printStackTrace();
