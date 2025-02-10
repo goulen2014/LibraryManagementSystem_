@@ -147,7 +147,7 @@ public class LibrarianServlet extends HttpServlet {
         
         int bookId = Integer.parseInt(bookIdParam);
         int librarianId = Integer.parseInt(request.getParameter("librarianId"));
-        String issuedTo = request.getParameter("issuedTo");
+        String issuedTo = request.getParameter("borrower");
         
         boolean success = bookDAO.issueBook(bookId, librarianId, issuedTo);
         if(success) {

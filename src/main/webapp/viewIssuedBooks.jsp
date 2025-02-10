@@ -16,6 +16,7 @@
                 <tr>
                     <th>Book ID</th>                    
                     <th>Librarian ID</th>               
+                    <th>Issued To</th>               
                     <th>Issue Date</th>               
                     <th>Return Date</th>               
                 </tr>
@@ -27,6 +28,7 @@
                         <tr>
                             <td><%=book.getBookId()%></td>
                             <td><%=book.getLibrarianId()%></td>
+                            <td><%=book.getIssuedTo()%></td>
                             <td><%=book.getIssueDate()%></td>
                             <td><%=book.getReturnDate() != null? book.getReturnDate() : "Not returned." %></td>
                         </tr>
@@ -34,7 +36,7 @@
                             }
                         } else {
                         %>
-                        <tr><td colspan="4">No books issued.</td></tr>
+                        <tr><td colspan="5">No books issued.</td></tr>
                         <% } %>           
             </table></br></br>
             <a href="LibrarianServlet">Back to Book List</a> |

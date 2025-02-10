@@ -13,8 +13,8 @@
             <label>Book ID:</label>
             <input type="text" name="bookId" value="<%=request.getParameter("id") %>">
             
-<!--            <label>Borrower Name:</label>
-            <input type="text" name="borrower" required /></br></br>-->
+            <label>Borrower Name:</label>
+            <input type="text" name="borrower" required /></br></br>
             
             <label>Librarian ID:</label>
             <input type="text" name="librarianId" required /></br></br>

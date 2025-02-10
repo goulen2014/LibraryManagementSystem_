@@ -10,6 +10,7 @@
         
         <div style="text-align:center;">
             <h1>Library Management System</h1>
+            <h2>Librarian Login</h2>
             <form action="LibrarianLoginServlet" method="post">
                 <label><b>Email:</b></label>
                 <input type="email" name="email" required></br></br>
